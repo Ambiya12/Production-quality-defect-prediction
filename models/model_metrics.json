@@ -1,0 +1,223 @@
+{
+  "dataset": {
+    "records": 2500,
+    "defect_rate": 0.1356,
+    "training_records": 2000,
+    "test_records": 500,
+    "synthetic": true
+  },
+  "split": {
+    "test_size": 0.2,
+    "random_state": 42,
+    "stratified": true
+  },
+  "model_features": [
+    "temperature",
+    "pressure",
+    "production_duration",
+    "production_month",
+    "production_hour",
+    "temperature_deviation",
+    "pressure_deviation",
+    "site",
+    "machine_id",
+    "operator_team",
+    "material_type",
+    "production_weekday",
+    "production_shift"
+  ],
+  "excluded_for_leakage": [
+    "production_id",
+    "production_date",
+    "quality_score",
+    "defect"
+  ],
+  "candidate_metrics": {
+    "logistic_regression": {
+      "threshold": 0.5,
+      "precision": 0.2346368715083799,
+      "recall": 0.6176470588235294,
+      "f1_score": 0.340080971659919,
+      "roc_auc": 0.7156862745098039,
+      "pr_auc": 0.3178236744115102,
+      "confusion_matrix": [
+        [
+          295,
+          137
+        ],
+        [
+          26,
+          42
+        ]
+      ],
+      "classification_report": {
+        "acceptable": {
+          "precision": 0.9190031152647975,
+          "recall": 0.6828703703703703,
+          "f1-score": 0.7835325365205843,
+          "support": 432.0
+        },
+        "defective": {
+          "precision": 0.2346368715083799,
+          "recall": 0.6176470588235294,
+          "f1-score": 0.340080971659919,
+          "support": 68.0
+        },
+        "accuracy": 0.674,
+        "macro avg": {
+          "precision": 0.5768199933865887,
+          "recall": 0.6502587145969498,
+          "f1-score": 0.5618067540902516,
+          "support": 500.0
+        },
+        "weighted avg": {
+          "precision": 0.8259293061139247,
+          "recall": 0.674,
+          "f1-score": 0.7232231236995339,
+          "support": 500.0
+        }
+      }
+    },
+    "random_forest": {
+      "threshold": 0.5,
+      "precision": 0.375,
+      "recall": 0.1323529411764706,
+      "f1_score": 0.1956521739130435,
+      "roc_auc": 0.7217116013071895,
+      "pr_auc": 0.3560943955095733,
+      "confusion_matrix": [
+        [
+          417,
+          15
+        ],
+        [
+          59,
+          9
+        ]
+      ],
+      "classification_report": {
+        "acceptable": {
+          "precision": 0.8760504201680672,
+          "recall": 0.9652777777777778,
+          "f1-score": 0.9185022026431718,
+          "support": 432.0
+        },
+        "defective": {
+          "precision": 0.375,
+          "recall": 0.1323529411764706,
+          "f1-score": 0.1956521739130435,
+          "support": 68.0
+        },
+        "accuracy": 0.852,
+        "macro avg": {
+          "precision": 0.6255252100840336,
+          "recall": 0.5488153594771242,
+          "f1-score": 0.5570771882781077,
+          "support": 500.0
+        },
+        "weighted avg": {
+          "precision": 0.80790756302521,
+          "recall": 0.852,
+          "f1-score": 0.8201945987358744,
+          "support": 500.0
+        }
+      }
+    }
+  },
+  "selected_model": "logistic_regression",
+  "selection_rationale": "Selected the candidate with the highest recall for defective products at the 0.50 threshold, using PR-AUC as a tie-breaker. In quality screening, missing a defect is treated as more costly than reviewing a false alert; precision remains visible because unnecessary reviews also have an operational cost.",
+  "interpretation": {
+    "method": "logistic_regression_coefficients",
+    "positive_associations": [
+      {
+        "feature": "numeric__temperature_deviation",
+        "coefficient": 0.5356315045849096
+      },
+      {
+        "feature": "categorical__machine_id_M-07",
+        "coefficient": 0.5329261624290675
+      },
+      {
+        "feature": "numeric__pressure_deviation",
+        "coefficient": 0.48900073039976777
+      },
+      {
+        "feature": "categorical__machine_id_M-06",
+        "coefficient": 0.4004663468272631
+      },
+      {
+        "feature": "categorical__machine_id_M-03",
+        "coefficient": 0.32171234860565784
+      },
+      {
+        "feature": "categorical__material_type_Ceramic",
+        "coefficient": 0.22631531353188944
+      },
+      {
+        "feature": "categorical__production_shift_Afternoon",
+        "coefficient": 0.21622826907397566
+      },
+      {
+        "feature": "numeric__production_duration",
+        "coefficient": 0.2058892318818697
+      },
+      {
+        "feature": "categorical__operator_team_Team D",
+        "coefficient": 0.19562870789463585
+      },
+      {
+        "feature": "categorical__production_weekday_Wednesday",
+        "coefficient": 0.15787541662816085
+      }
+    ],
+    "negative_associations": [
+      {
+        "feature": "categorical__machine_id_M-08",
+        "coefficient": -0.5333422568596787
+      },
+      {
+        "feature": "categorical__machine_id_M-05",
+        "coefficient": -0.4579065569671117
+      },
+      {
+        "feature": "categorical__production_weekday_Monday",
+        "coefficient": -0.3534077404765133
+      },
+      {
+        "feature": "categorical__machine_id_M-02",
+        "coefficient": -0.23681005957907061
+      },
+      {
+        "feature": "categorical__production_shift_Night",
+        "coefficient": -0.18493704148424883
+      },
+      {
+        "feature": "categorical__production_shift_Morning",
+        "coefficient": -0.13601435959884867
+      },
+      {
+        "feature": "categorical__operator_team_Team B",
+        "coefficient": -0.13249210070516415
+      },
+      {
+        "feature": "categorical__material_type_Alloy",
+        "coefficient": -0.13033708738244515
+      },
+      {
+        "feature": "numeric__production_hour",
+        "coefficient": -0.12710075863452636
+      },
+      {
+        "feature": "categorical__operator_team_Team A",
+        "coefficient": -0.12414991809220688
+      }
+    ],
+    "caution": "Coefficients describe conditional associations with predicted risk; they do not establish causal effects."
+  },
+  "limitations": [
+    "The dataset is synthetic and cannot demonstrate real-world performance.",
+    "Feature effects are predictive associations, not evidence of causation.",
+    "The decision threshold must be validated against real inspection costs.",
+    "Production experts must validate findings before any operational use."
+  ]
+}

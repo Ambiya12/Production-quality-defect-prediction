@@ -136,7 +136,10 @@ def main() -> None:
             f"Model not found at {DEFAULT_MODEL_PATH}. Run python src/train_model.py first."
         )
 
-    from src.train_model import MODEL_FEATURES, RANDOM_STATE, TARGET_COLUMN, TEST_SIZE
+    try:
+        from src.train_model import MODEL_FEATURES, RANDOM_STATE, TARGET_COLUMN, TEST_SIZE
+    except ModuleNotFoundError:
+        from train_model import MODEL_FEATURES, RANDOM_STATE, TARGET_COLUMN, TEST_SIZE
 
     data = pd.read_csv(DEFAULT_DATA_PATH, parse_dates=["production_date"])
     train_data, test_data = train_test_split(
@@ -149,7 +152,7 @@ def main() -> None:
     pipeline = joblib.load(DEFAULT_MODEL_PATH)
     metrics = evaluate_pipeline(
         pipeline,
-        test_data[MODEL_FEATURES],
+        test_data.loc[:, list(MODEL_FEATURES)],
         test_data[TARGET_COLUMN],
     )
     print_metrics("Persisted final model", metrics)
