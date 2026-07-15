@@ -88,22 +88,22 @@ def generate_production_data(
     night_shift = (production_dates.hour < 6) | (production_dates.hour >= 22)
 
     machine_risk = pd.Series(machines).map(
-        {"M-03": 0.30, "M-06": 0.18, "M-07": 0.58}
+        {"M-03": 0.45, "M-06": 0.30, "M-07": 0.75}
     ).fillna(0.0).to_numpy()
     material_risk = pd.Series(materials).map(
-        {"Ceramic": 0.35, "Composite": 0.12, "Precious metal": 0.22}
+        {"Ceramic": 0.55, "Composite": 0.18, "Precious metal": 0.30}
     ).fillna(0.0).to_numpy()
-    team_risk = pd.Series(teams).map({"Team D": 0.22}).fillna(0.0).to_numpy()
+    team_risk = pd.Series(teams).map({"Team D": 0.30}).fillna(0.0).to_numpy()
 
     log_odds = (
-        -3.25
+        -3.60
         + machine_risk
         + material_risk
         + team_risk
-        + 0.12 * np.maximum(temperature_deviation - 4.0, 0.0)
-        + 0.68 * np.maximum(pressure_deviation - 0.35, 0.0)
-        + 0.030 * np.maximum(production_duration - 48.0, 0.0)
-        + 0.18 * night_shift.astype(float)
+        + 0.20 * np.maximum(temperature_deviation - 3.0, 0.0)
+        + 1.20 * np.maximum(pressure_deviation - 0.25, 0.0)
+        + 0.050 * np.maximum(production_duration - 45.0, 0.0)
+        + 0.22 * night_shift.astype(float)
     )
     defect_probability = _sigmoid(log_odds)
     defect = rng.binomial(1, defect_probability)
