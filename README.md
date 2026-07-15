@@ -326,20 +326,6 @@ Before operational use, a real implementation would require data governance, acc
 - Store records and prediction audits in SQLite as a lightweight extension.
 - Add integration tests for model artifacts and dashboard data loading.
 
-## 20. CV-ready project description
-
-### Analyse et prédiction des défauts de production
-
-Projet personnel — Python, Pandas, Scikit-learn, Plotly, Streamlit
-
-- Génération, nettoyage et analyse exploratoire d’un jeu de données industriel synthétique comprenant plus de 2 000 observations.
-- Création d’indicateurs de suivi de la qualité par site, machine, matériau, équipe et période.
-- Réalisation d’une analyse statistique des conditions de production associées aux défauts.
-- Comparaison de modèles de régression logistique et de Random Forest pour estimer le risque de défaut.
-- Évaluation des modèles avec les métriques de précision, rappel, score F1, ROC-AUC et PR-AUC.
-- Développement d’un tableau de bord Streamlit destiné à des utilisateurs non techniques.
-- Documentation des résultats, des limites du modèle et des recommandations opérationnelles.
-
 ## License
 
 This project is available under the MIT License. See `LICENSE`.
