@@ -1,0 +1,32 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Streamlit and local configuration
+.streamlit/secrets.toml
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+
+# Test and coverage artifacts
+.coverage
+htmlcov/
+
+# Logs and temporary files
+*.log
+*.tmp
+~$*
